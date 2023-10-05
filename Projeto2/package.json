@@ -1,0 +1,25 @@
+{
+  "name": "projeto2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "lint": "eslint src -ext .ts --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^2.1.0",
+    "@types/node": "^20.8.2",
+    "eslint": "^8.50.0",
+    "tsx": "^3.13.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "fastify": "^4.23.2",
+    "knex": "^2.5.1",
+    "pg": "^8.11.3"
+  }
+}
