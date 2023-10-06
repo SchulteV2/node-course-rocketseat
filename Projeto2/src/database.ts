@@ -1,11 +1,19 @@
-import { knex as setupKnex } from 'knex'
+import { knex as setupKnex, Knex } from 'knex'
+import { env } from './env'
 
-export const knex = setupKnex({
+export const config: Knex.Config = {
   client: 'pg',
   connection: {
-    host: 'localhost',
-    user: 'postgres',
-    password: 'postgres',
-    database: 'node-course-projeto-2',
+    port: env.DB_PORT,
+    host: env.DB_HOST,
+    user: env.DB_USER,
+    password: env.DB_PASSWORD,
+    database: env.DB,
   },
-})
+  migrations: {
+    extension: 'ts',
+    directory: './db/migrations',
+  },
+}
+
+export const knex = setupKnex(config)
