@@ -10,6 +10,7 @@ export const config: Knex.Config = {
     password: env.DB_PASSWORD,
     database: env.DB,
   },
+  searchPath: ['knex', 'public'],
   migrations: {
     extension: 'ts',
     directory: './db/migrations',
