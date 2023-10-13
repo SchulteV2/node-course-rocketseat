@@ -8,5 +8,5 @@
 # Regra de Negócio
 
 -- [x] transação crédito somara ao valor total, débito subtraira
--- [ ] deve ser possível identificar o usuário entre as requisições
--- [ ] só pode visualizar uma transação que ele criou
+-- [x] deve ser possível identificar o usuário entre as requisições
+-- [x] só pode visualizar uma transação que ele criou
