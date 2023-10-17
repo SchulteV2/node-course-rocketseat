@@ -75,12 +75,12 @@ describe('Transactions Routes', () => {
       .set('Cookie', cookies)
       .expect(200)
 
-    expect(getTransactionsResponse.body.transactions).toEqual([
+    expect(getTransactionsResponse.body.transaction).toEqual(
       expect.objectContaining({
         title: 'new transaction',
         amount: '6000.00',
       }),
-    ])
+    )
   })
 
   it('should be able to get the summary', async () => {
@@ -108,10 +108,10 @@ describe('Transactions Routes', () => {
       .set('Cookie', cookies)
       .expect(200)
 
-    expect(summaryResponse.body.transaction.summary).toEqual([
+    expect(summaryResponse.body.summary).toEqual(
       expect.objectContaining({
         amount: '3000.00',
       }),
-    ])
+    )
   })
 })
