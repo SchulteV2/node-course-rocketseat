@@ -9,6 +9,7 @@ if (process.env.NODE_ENV === 'test') {
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('production'),
+  DB_CLIENT: z.string(),
   DB_PORT: z.coerce.number(),
   DB_HOST: z.string(),
   DB_USER: z.string(),

@@ -2,7 +2,7 @@ import { knex as setupKnex, Knex } from 'knex'
 import { env } from './env'
 
 export const config: Knex.Config = {
-  client: 'pg',
+  client: env.DB_CLIENT,
   connection: {
     port: env.DB_PORT,
     host: env.DB_HOST,
