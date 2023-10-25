@@ -1,4 +1,4 @@
-import { PrismaUserRepository } from '@/repositories/prisma/prisma-users.repository'
+import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users.repository'
 import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-error'
 import { RegisterUseCase } from '@/use-cases/register'
 import { FastifyRequest, FastifyReply } from 'fastify'
@@ -14,8 +14,8 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
   const { name, email, password } = registerBodySchema.parse(request.body)
 
   try {
-    const prismaUserRepository = new PrismaUserRepository()
-    const registerUseCase = new RegisterUseCase(prismaUserRepository)
+    const usersRepository = new PrismaUsersRepository()
+    const registerUseCase = new RegisterUseCase(usersRepository)
 
     await registerUseCase.execute({
       name,
