@@ -3,7 +3,7 @@ import { SearchGymsUseCase } from '../search-gyms'
 
 export function MakeSearchGymsUseCase() {
   const gymsRepository = new PrismaGymsRepository()
-  const searchGymsRepository = new SearchGymsUseCase(gymsRepository)
+  const searchGymsUseCase = new SearchGymsUseCase(gymsRepository)
 
-  return searchGymsRepository
+  return searchGymsUseCase
 }

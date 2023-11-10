@@ -30,8 +30,8 @@ describe('Search Gyms (e2e)', () => {
       .post('/gyms')
       .set('Authorization', `Bearer ${token}`)
       .send({
-        name: 'gym-02',
-        description: 'gym-02-test',
+        name: 'nasio',
+        description: 'nasio',
         phone: '49999999',
         latitude: -27.2892852,
         longitude: -49.6401091,
@@ -46,7 +46,7 @@ describe('Search Gyms (e2e)', () => {
       .send()
 
     expect(response.statusCode).toEqual(200)
-    // expect(response.body.gyms).toHaveLength(1)
+    expect(response.body.gyms).toHaveLength(1)
     expect(response.body.gyms).toEqual([
       expect.objectContaining({
         name: 'gym-01',

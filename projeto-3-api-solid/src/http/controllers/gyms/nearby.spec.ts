@@ -1,6 +1,7 @@
 import request from 'supertest'
 import { app } from '@/app'
-import { afterAll, beforeAll, describe, it } from 'vitest'
+import { afterAll, beforeAll, describe, expect, it } from 'vitest'
+import { createAndAuthenticateUser } from '@/utils/test/create-and-authenticate-user'
 
 describe('nearby gyms (e2e)', () => {
   beforeAll(async () => {
@@ -10,25 +11,48 @@ describe('nearby gyms (e2e)', () => {
     await app.close()
   })
 
-  it.skip('should be able to find nearby gyms', async () => {
-    await request(app.server).post('/gyms').send({
-      name: 'gym-01',
-      description: 'gym-01-test',
-      phone: '49999999',
-      latitude: -27.2892852,
-      longitude: -49.6401091,
-    })
-    await request(app.server).post('/gyms').send({
-      name: 'gym-01',
-      description: 'gym-02-test',
-      phone: '49999999',
-      latitude: -27.003595,
-      longitude: -51.145752,
-    })
+  it('should be able to find nearby gyms', async () => {
+    const { token } = await createAndAuthenticateUser(app)
 
-    const { gyms } = await sut.execute({
-      userLatitude: -27.2092052,
-      userLongitude: -49.6401891,
-    })
+    await request(app.server)
+      .post('/gyms')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        name: 'gym-01',
+        description: 'gym-01-test',
+        phone: '49999999',
+        latitude: -27.0610928,
+        longitude: -49.5229581,
+      })
+
+    await request(app.server)
+      .post('/gyms')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        name: 'nasio',
+        description: 'nasio',
+        phone: '49999999',
+        latitude: -27.2092052,
+        longitude: -49.6401091,
+      })
+
+    const response = await request(app.server)
+      .get('/gyms/nearby')
+      .query({
+        latitude: -27.2092052,
+        longitude: -49.6401091,
+      })
+      .set('Authorization', `Bearer ${token}`)
+      .send()
+
+    console.log(response)
+
+    expect(response.statusCode).toEqual(200)
+    expect(response.body.gyms).toHaveLength(1)
+    expect(response.body.gyms).toEqual([
+      expect.objectContaining({
+        name: 'nasio',
+      }),
+    ])
   })
 })

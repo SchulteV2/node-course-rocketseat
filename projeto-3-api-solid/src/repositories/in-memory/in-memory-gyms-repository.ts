@@ -46,6 +46,7 @@ export class InMemoryGymsRepository implements GymsRepository {
       phone: data.phone ?? null,
       longitude: new Prisma.Decimal(data.longitude.toString()),
       latitude: new Prisma.Decimal(data.latitude.toString()),
+      created_at: new Date(),
     }
 
     this.items.push(gym)
