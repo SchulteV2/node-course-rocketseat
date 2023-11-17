@@ -61,8 +61,8 @@ export class CheckInUseCase {
       throw new MaxNumberOfCheckinsError()
     }
     const checkIn = await this.checkInsRepository.create({
-      user_id: userId,
       gym_id: gymId,
+      user_id: userId,
     })
 
     return {
