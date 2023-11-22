@@ -12,7 +12,7 @@ jobs:
       image: postgres
       ports:
         - 5432:5432
-      environment:
+      env:
         - POSTGRESQL_USERNAME=postgres
         - POSTGRESQL_PASSWORD=postgres
         - POSTGRESQL_DATABASE=apisolid
